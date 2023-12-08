@@ -2,10 +2,7 @@ spring:
  cloud:
    gateway:
      routes:
-       - id: candidat-s
-         uri: http://localhost:8082/
-         predicates:
-             - Path=/candidats/**
+
 
 
        - id: hebergement-microservice
@@ -16,7 +13,7 @@ spring:
        - id: reclamation-microservice
          uri: http://localhost:8082/
          predicates:
-           - Path=/hebergement/**
+           - Path=/reclamation/**
 
 
 
@@ -32,7 +29,7 @@ spring:
    oauth2:
      resourceserver:
        jwt:
-         issuer-uri: http://localhost:8081/realms/springboot-microservice-realm
+         issuer-uri: http://localhost:9090/realms/SpringbootKeycloak
 
 eureka:
   client:
