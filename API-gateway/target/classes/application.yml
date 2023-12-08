@@ -1,0 +1,29 @@
+spring:
+ cloud:
+   gateway:
+     routes:
+       - id: candidat-s
+         uri: http://localhost:8082/
+         predicates:
+             - Path=/candidats/**
+
+
+
+
+
+
+
+
+ application:
+   name: SWIGGY-GATEWAY
+
+ security:
+   oauth2:
+     resourceserver:
+       jwt:
+         issuer-uri: http://localhost:8081/realms/springboot-microservice-realm
+
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/
