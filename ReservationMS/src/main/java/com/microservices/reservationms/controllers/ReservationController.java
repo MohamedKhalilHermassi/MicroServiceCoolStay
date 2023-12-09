@@ -3,6 +3,7 @@ package com.microservices.reservationms.controllers;
 import com.microservices.reservationms.entities.Reservation;
 import com.microservices.reservationms.services.ReservationService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,4 +41,12 @@ public class ReservationController {
     {
         reservationService.delete(id);
     }
+
+    @GetMapping("/hebergement/{hebergement-id}")
+    public ResponseEntity<List<Reservation>> findReservationByHebergement(
+            @PathVariable("hebergement-id") Long hebergementId){
+        return ResponseEntity.ok(reservationService.FindAllReservationByHebergement(hebergementId));
+
+    }
+
 }

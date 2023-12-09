@@ -3,7 +3,6 @@ package com.microservices.reservationms.services;
 import com.microservices.reservationms.entities.Reservation;
 import com.microservices.reservationms.repositories.ReservationRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,5 +33,9 @@ public class ReservationService {
     public void delete(Long id)
     {
         reservationRepository.deleteById(id);
+    }
+
+    public List<Reservation> FindAllReservationByHebergement(Long hebergementId) {
+        return reservationRepository.findAllByHebergementId(hebergementId);
     }
 }

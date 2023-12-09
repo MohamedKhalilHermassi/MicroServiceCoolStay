@@ -30,6 +30,7 @@ public class Reservation implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate  date_fin;
     private String detail;
+    private Long hebergementId;
 
 
 }

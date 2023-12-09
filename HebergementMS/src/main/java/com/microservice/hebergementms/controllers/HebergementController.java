@@ -1,8 +1,10 @@
 package com.microservice.hebergementms.controllers;
 
+import com.microservice.hebergementms.entities.FullHebergementResponse;
 import com.microservice.hebergementms.entities.Hebergement;
 import com.microservice.hebergementms.services.ServiceHebergement;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Path;
@@ -40,5 +42,11 @@ public class HebergementController {
     {
         return serviceHebergement.update(hebergement);
     }
+
+    @GetMapping("/with-reservation/{hebergement-id}")
+    public ResponseEntity<FullHebergementResponse> findAllHebergement(@PathVariable("hebergement-id") Long hebergementId){
+        return  ResponseEntity.ok(serviceHebergement.findHebergementWithReservations(hebergementId));
+    }
+
 
 }

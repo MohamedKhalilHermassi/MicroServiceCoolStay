@@ -1,8 +1,11 @@
 package com.microservice.hebergementms.services;
 
+import com.microservice.hebergementms.client.ReservationClient;
+import com.microservice.hebergementms.entities.FullHebergementResponse;
 import com.microservice.hebergementms.entities.Hebergement;
 import com.microservice.hebergementms.repositories.HebergementRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ServiceHebergement {
    private HebergementRepository hebergementRepository;
-
+    private ReservationClient reservationClient;
    public Hebergement add(Hebergement hebergement)
    {
       return hebergementRepository.save(hebergement);
@@ -36,4 +39,24 @@ public class ServiceHebergement {
   return  hebergementRepository.save(hebergement);
    }
 
+    public FullHebergementResponse findHebergementWithReservations(Long hebergementId) {
+        var hebergement = hebergementRepository.findById(hebergementId)
+                .orElse(Hebergement.builder().nom("NOT_FOUND")
+                        .libelle("NOT_FOUND")
+                        .adresse("NOT_FOUND")
+                        .capacite(null)
+                        .prix(null)
+                        .build()
+                );
+        var reservation = reservationClient.findAllReservationbyHebergement(hebergementId); // get all reservation from ReservationMS
+        return FullHebergementResponse.builder()
+                .nom(hebergement.getNom())
+                .adresse(hebergement.getAdresse())
+                .reservations(reservation)
+                .prix(hebergement.getPrix())
+                .libelle(hebergement.getLibelle())
+                .capacite(hebergement.getCapacite())
+
+                    .build();
+    }
 }
