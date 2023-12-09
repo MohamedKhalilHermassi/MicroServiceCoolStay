@@ -12,10 +12,10 @@ public class Beans {
     public Keycloak Keycloak(){
         return KeycloakBuilder.builder()
                 .serverUrl("http://localhost:9090/")
-                .realm("test")
+                .realm("SpringbootKeycloak")
                 .grantType(OAuth2Constants.CLIENT_CREDENTIALS)
                 .clientId("admin-cli")
-                .clientSecret("AkvZtJUDiJ3CA7iHdfcObsTeYpi4H7wX")
+                .clientSecret("Kkac39Y4xIyOZ0Vk8Gv9XJ1cdxbHGCM1")
                 .build();
     }
 }

@@ -38,4 +38,8 @@ public class ReservationService {
     public List<Reservation> FindAllReservationByHebergement(Long hebergementId) {
         return reservationRepository.findAllByHebergementId(hebergementId);
     }
+
+    public List<Reservation> FindAllReservationByUser(Long userId) {
+        return reservationRepository.findAllByUserId(userId);
+    }
 }

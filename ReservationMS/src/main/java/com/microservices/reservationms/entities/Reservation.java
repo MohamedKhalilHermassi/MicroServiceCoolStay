@@ -31,6 +31,7 @@ public class Reservation implements Serializable {
     private LocalDate  date_fin;
     private String detail;
     private Long hebergementId;
+    private Long userId;
 
 
 }

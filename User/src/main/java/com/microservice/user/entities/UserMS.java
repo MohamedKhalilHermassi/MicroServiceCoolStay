@@ -21,5 +21,6 @@ public class UserMS implements Serializable {
     private String firstName;
     private String lastName;
     private String password;
+    private String email;
     private String role;
 }

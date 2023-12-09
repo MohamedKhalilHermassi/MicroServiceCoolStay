@@ -1,10 +1,13 @@
 package com.microservice.user.Service;
 
 import com.microservice.user.Repositories.UserRepository;
+import com.microservice.user.client.ReservationClient;
 import com.microservice.user.dto.UserRegistrationRecord;
+import com.microservice.user.entities.FullUserResponse;
 import com.microservice.user.entities.UserMS;
 import jakarta.ws.rs.core.Response;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.RealmResource;
@@ -26,6 +29,8 @@ public class KeyCloakUserServiceImpl implements KeyCloakUserService{
     private Keycloak keycloak;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ReservationClient reservationClient;
 
     public KeyCloakUserServiceImpl(Keycloak keycloak) {
         this.keycloak = keycloak;
@@ -40,6 +45,7 @@ public class KeyCloakUserServiceImpl implements KeyCloakUserService{
         newUser.setLastName(userRegistrationRecord.lastName());
         newUser.setPassword(userRegistrationRecord.password());
         newUser.setRole("user");
+        newUser.setEmail(userRegistrationRecord.email());
 
         user.setEnabled(true);
         user.setUsername(userRegistrationRecord.username());
@@ -47,6 +53,7 @@ public class KeyCloakUserServiceImpl implements KeyCloakUserService{
         user.setFirstName(userRegistrationRecord.firstName());
         user.setLastName(userRegistrationRecord.lastName());
         user.setEmailVerified(true);
+
         CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
         credentialRepresentation.setValue(userRegistrationRecord.password());
         credentialRepresentation.setTemporary(false);
@@ -65,7 +72,7 @@ public class KeyCloakUserServiceImpl implements KeyCloakUserService{
     }
 
     private UsersResource getUsersResource() {
-        RealmResource realm1 = keycloak.realm("test");
+        RealmResource realm1 = keycloak.realm("SpringbootKeycloak");
         return realm1.users();
     }
 
@@ -77,5 +84,28 @@ public class KeyCloakUserServiceImpl implements KeyCloakUserService{
     @Override
     public void deleteUserById(String userId) {
         getUsersResource().delete(userId);
+    }
+
+    public FullUserResponse findUsersWithReservations(Long userId) {
+        var user = userRepository.findById(userId)
+                .orElse(UserMS.builder()
+                        .role("NOT_FOUND")
+                        .firstName("NOT_FOUND")
+                        .lastName("NOT_FOUND")
+                        .password("NOT_FOUND")
+                        .email("NOT_FOUND")
+                        .build()
+                );
+        var reservation = reservationClient.findAllUsersWithReservations(userId); // get all reservation from ReservationMS
+        return FullUserResponse.builder()
+                .id(user.getId())
+                
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .reservations(reservation)
+                .role(user.getRole())
+
+
+                .build();
     }
 }

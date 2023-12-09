@@ -49,4 +49,12 @@ public class ReservationController {
 
     }
 
+    @GetMapping("/user/{user-id}")
+    public ResponseEntity<List<Reservation>> findReservationByUser(
+            @PathVariable("user-id")  Long userId)
+    {
+        return ResponseEntity.ok(reservationService.FindAllReservationByUser(userId));
+    }
+
+
 }
