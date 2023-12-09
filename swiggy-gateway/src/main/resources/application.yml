@@ -2,7 +2,10 @@ spring:
  cloud:
    gateway:
      routes:
-
+       - id: reservation-microservice
+         uri: http://localhost:8083/
+         predicates:
+           - Path=/reservation/**
 
 
        - id: hebergement-microservice
@@ -11,7 +14,7 @@ spring:
            - Path=/hebergement/**
 
        - id: reclamation-microservice
-         uri: http://localhost:8082/
+         uri: http://localhost:8085/
          predicates:
            - Path=/reclamation/**
 
