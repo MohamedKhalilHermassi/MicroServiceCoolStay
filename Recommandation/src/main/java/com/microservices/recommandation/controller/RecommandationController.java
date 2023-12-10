@@ -42,4 +42,10 @@ public class RecommandationController {
     }
 
 
+    @GetMapping("/hebergement/{heberegement-id}")
+    public ResponseEntity<List<Recommandation>> findRecommandationByHebregement(
+            @PathVariable("heberegement-id")  Long heberegementId)
+    {
+        return ResponseEntity.ok(recommandationService.FindAllRecommandationByheberegement(heberegementId));
+    }
 }

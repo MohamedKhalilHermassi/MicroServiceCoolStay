@@ -9,7 +9,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.GetMapping;
+=======
+>>>>>>> 979bd5ac9f5f91fdbf718329857a543379e80b6c
 
 import java.io.Serializable;
 
@@ -27,8 +30,5 @@ public class Recommandation implements Serializable {
     private Float rating;
     private String auteur;
     private Long userId;
-
-
-
-
+    private Long idHebergement;
 }

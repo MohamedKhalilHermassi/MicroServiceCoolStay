@@ -1,6 +1,7 @@
 package com.microservice.hebergementms.controllers;
 
 import com.microservice.hebergementms.entities.FullHebergementResponse;
+import com.microservice.hebergementms.entities.FullHebergementWithRecommandationResponse;
 import com.microservice.hebergementms.entities.Hebergement;
 import com.microservice.hebergementms.services.ServiceHebergement;
 import lombok.AllArgsConstructor;
@@ -48,5 +49,8 @@ public class HebergementController {
         return  ResponseEntity.ok(serviceHebergement.findHebergementWithReservations(hebergementId));
     }
 
-
+    @GetMapping("/with-recommandation/{hebergement-id}")
+    public ResponseEntity<FullHebergementWithRecommandationResponse> findAllRecommandation(@PathVariable("hebergement-id") Long hebergementId){
+        return  ResponseEntity.ok(serviceHebergement.findHebergementWithRecommandation(hebergementId));
+    }
 }

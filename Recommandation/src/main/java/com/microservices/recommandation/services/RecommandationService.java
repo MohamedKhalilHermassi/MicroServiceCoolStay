@@ -51,4 +51,7 @@ public class RecommandationService {
     }
 
 
+    public List<Recommandation> FindAllRecommandationByheberegement(Long heberegementId) {
+        return recommandationRepository.findAllByIdHebergement(heberegementId);
+    }
 }
