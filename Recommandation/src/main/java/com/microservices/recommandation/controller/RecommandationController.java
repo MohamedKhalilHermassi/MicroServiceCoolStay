@@ -40,4 +40,6 @@ public class RecommandationController {
     public ResponseEntity<String> deleteCandidat(@PathVariable(value = "id") int id){
         return new ResponseEntity<>(recommandationService.deleteRecommandation(id), HttpStatus.OK);
     }
+
+
 }

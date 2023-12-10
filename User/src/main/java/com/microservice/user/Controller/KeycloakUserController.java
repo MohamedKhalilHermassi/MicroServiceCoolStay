@@ -4,6 +4,7 @@ import com.microservice.user.Service.KeyCloakUserService;
 import com.microservice.user.Service.KeyCloakUserServiceImpl;
 import com.microservice.user.dto.UserRegistrationRecord;
 import com.microservice.user.entities.FullUserResponse;
+import com.microservice.user.entities.FullUserWithReclamationResponse;
 import lombok.AllArgsConstructor;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.http.ResponseEntity;
@@ -36,5 +37,11 @@ public class KeycloakUserController {
     public ResponseEntity<FullUserResponse> findAllHebergement(@PathVariable("user-id") Long userId){
         return  ResponseEntity.ok(keyCloakUserServiceImpl.findUsersWithReservations(userId));
     }
+
+    @GetMapping("/with-reclamation/{user-id}")
+    public ResponseEntity<FullUserWithReclamationResponse> findAllReclamation(@PathVariable("user-id") Long userId){
+        return  ResponseEntity.ok(keyCloakUserServiceImpl.findUserWithReclamations(userId));
+    }
+
 
 }

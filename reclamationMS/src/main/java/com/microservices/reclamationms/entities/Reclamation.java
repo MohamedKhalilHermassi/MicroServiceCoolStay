@@ -25,5 +25,6 @@ public class Reclamation implements Serializable {
     private Boolean status;
     private String message;
     private String type;
+    private Long userId;
 
 }

@@ -1,9 +1,11 @@
 package com.microservice.user.Service;
 
 import com.microservice.user.Repositories.UserRepository;
+import com.microservice.user.client.ReclamationClient;
 import com.microservice.user.client.ReservationClient;
 import com.microservice.user.dto.UserRegistrationRecord;
 import com.microservice.user.entities.FullUserResponse;
+import com.microservice.user.entities.FullUserWithReclamationResponse;
 import com.microservice.user.entities.UserMS;
 import jakarta.ws.rs.core.Response;
 import lombok.AllArgsConstructor;
@@ -31,6 +33,8 @@ public class KeyCloakUserServiceImpl implements KeyCloakUserService{
     private UserRepository userRepository;
     @Autowired
     private ReservationClient reservationClient;
+    @Autowired
+    private ReclamationClient reclamationClient;
 
     public KeyCloakUserServiceImpl(Keycloak keycloak) {
         this.keycloak = keycloak;
@@ -78,7 +82,12 @@ public class KeyCloakUserServiceImpl implements KeyCloakUserService{
 
     @Override
     public UserRepresentation getUserById(String userId) {
+
+
         return getUsersResource().get(userId).toRepresentation();
+
+
+
     }
 
     @Override
@@ -103,6 +112,30 @@ public class KeyCloakUserServiceImpl implements KeyCloakUserService{
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .reservations(reservation)
+                .role(user.getRole())
+
+
+                .build();
+    }
+
+    public FullUserWithReclamationResponse findUserWithReclamations(Long userId) {
+
+        var user = userRepository.findById(userId)
+                .orElse(UserMS.builder()
+                        .role("NOT_FOUND")
+                        .firstName("NOT_FOUND")
+                        .lastName("NOT_FOUND")
+                        .password("NOT_FOUND")
+                        .email("NOT_FOUND")
+                        .build()
+                );
+        var reclamation = reclamationClient.findAllUsersWithReclamations(userId); // get all reservation from ReservationMS
+        return FullUserWithReclamationResponse.builder()
+                .id(user.getId())
+
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .reclamations(reclamation)
                 .role(user.getRole())
 
 

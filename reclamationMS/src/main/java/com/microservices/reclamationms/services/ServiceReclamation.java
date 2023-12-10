@@ -35,5 +35,8 @@ public class ServiceReclamation {
    }
 
 
+    public List<Reclamation> FindAllReclamationByUser(Long userId) {
+        return reclamationRepository.findAllByUserId(userId);
 
+    }
 }
