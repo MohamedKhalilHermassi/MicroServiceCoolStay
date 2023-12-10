@@ -23,5 +23,7 @@ public class Reponse implements Serializable {
     private String message;
     private String Auteur;
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate Date;
+    private LocalDate date;
+    private Long idReclamation;
+
 }

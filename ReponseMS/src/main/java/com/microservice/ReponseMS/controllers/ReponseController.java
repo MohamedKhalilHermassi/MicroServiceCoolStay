@@ -3,6 +3,7 @@ package com.microservice.ReponseMS.controllers;
 import com.microservice.ReponseMS.entities.Reponse;
 import com.microservice.ReponseMS.services.ReponseService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,4 +38,13 @@ public class ReponseController {
     {
         return reponseService.update(reponse);
     }
+
+  @GetMapping("/reclamation/{reclamation-id}")
+  public ResponseEntity<Reponse> findReponseByReclamation(
+          @PathVariable("reclamation-id")  Long reclamationId)
+  {
+    return ResponseEntity.ok(reponseService.FindAllReponseByReclamation(reclamationId));
+  }
+
+
 }

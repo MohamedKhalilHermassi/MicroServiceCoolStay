@@ -1,5 +1,6 @@
 package com.microservices.reclamationms.controllers;
 
+import com.microservices.reclamationms.entities.FullReclamationWithResponse;
 import com.microservices.reclamationms.entities.Reclamation;
 import com.microservices.reclamationms.services.ServiceReclamation;
 import lombok.AllArgsConstructor;
@@ -46,5 +47,10 @@ public class ReclamationController {
     {
         return ResponseEntity.ok(serviceReclamation.FindAllReclamationByUser(userId));
     }
+    @GetMapping("/with-reponse/{reclamation-id}")
+    public ResponseEntity<FullReclamationWithResponse> findReclamationwithResponse(@PathVariable("reclamation-id") Long reclamationId){
+        return  ResponseEntity.ok(serviceReclamation.findReclamationsWithReponses(reclamationId));
+    }
+
 
 }

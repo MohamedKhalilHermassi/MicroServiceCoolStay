@@ -14,7 +14,7 @@ spring:
            - Path=/hebergement/**
 
        - id: reclamation-microservice
-         uri: http://localhost:8085/
+         uri: http://localhost:8084/
          predicates:
            - Path=/reclamations/**
 
@@ -22,6 +22,11 @@ spring:
          uri: http://localhost:8087/
          predicates:
            - Path=/users/**
+       - id: reponse-microservice
+         uri: http://localhost:8086/
+         predicates:
+           - Path=/reponse/**
+
 
 
 
