@@ -49,4 +49,8 @@ public class RecommandationService {
             return "La recommandation à supprimer n'a pas été trouvée.";
         }
     }
+
+    public List<Recommandation> FindAllRecommandationByheberegement(Long heberegementId) {
+        return recommandationRepository.findAllByIdHebergement(heberegementId);
+    }
 }

@@ -5,11 +5,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
 @Entity
-
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Recommandation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,37 +25,5 @@ public class Recommandation implements Serializable {
     private Float rating;
     private String auteur;
 
-
-
-
-
-    // Getters
-
-
-    public String getCommentaire() {
-        return commentaire;
-    }
-
-    public Float getRating() {
-        return rating;
-    }
-
-    public String getAuteur() {
-        return auteur;
-    }
-
-    // Setters
-
-
-    public void setCommentaire(String commentaire) {
-        this.commentaire = commentaire;
-    }
-
-    public void setRating(Float rating) {
-        this.rating = rating;
-    }
-
-    public void setAuteur(String auteur) {
-        this.auteur = auteur;
-    }
+    private Long idHebergement;
 }

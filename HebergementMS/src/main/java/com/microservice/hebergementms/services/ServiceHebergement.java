@@ -1,7 +1,9 @@
 package com.microservice.hebergementms.services;
 
+import com.microservice.hebergementms.client.RecommandationClient;
 import com.microservice.hebergementms.client.ReservationClient;
 import com.microservice.hebergementms.entities.FullHebergementResponse;
+import com.microservice.hebergementms.entities.FullHebergementWithRecommandationResponse;
 import com.microservice.hebergementms.entities.Hebergement;
 import com.microservice.hebergementms.repositories.HebergementRepository;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import java.util.List;
 public class ServiceHebergement {
    private HebergementRepository hebergementRepository;
     private ReservationClient reservationClient;
+    private RecommandationClient recommandationClient;
    public Hebergement add(Hebergement hebergement)
    {
       return hebergementRepository.save(hebergement);
@@ -58,5 +61,26 @@ public class ServiceHebergement {
                 .capacite(hebergement.getCapacite())
 
                     .build();
+    }
+
+    public FullHebergementWithRecommandationResponse findHebergementWithRecommandation(Long hebergementId) {
+        var hebergement = hebergementRepository.findById(hebergementId)
+                .orElse(Hebergement.builder().nom("NOT_FOUND")
+                        .libelle("NOT_FOUND")
+                        .adresse("NOT_FOUND")
+                        .capacite(null)
+                        .prix(null)
+                        .build()
+                );
+        var recommandation = recommandationClient.findRecommandationByHebregement(hebergementId); // get all reservation from ReservationMS
+        return FullHebergementWithRecommandationResponse.builder()
+                .nom(hebergement.getNom())
+                .adresse(hebergement.getAdresse())
+                .recommandations(recommandation)
+                .prix(hebergement.getPrix())
+                .libelle(hebergement.getLibelle())
+                .capacite(hebergement.getCapacite())
+
+                .build();
     }
 }

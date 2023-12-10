@@ -40,4 +40,11 @@ public class RecommandationController {
     public ResponseEntity<String> deleteCandidat(@PathVariable(value = "id") int id){
         return new ResponseEntity<>(recommandationService.deleteRecommandation(id), HttpStatus.OK);
     }
+
+    @GetMapping("/hebergement/{heberegement-id}")
+    public ResponseEntity<List<Recommandation>> findRecommandationByHebregement(
+            @PathVariable("heberegement-id")  Long heberegementId)
+    {
+        return ResponseEntity.ok(recommandationService.FindAllRecommandationByheberegement(heberegementId));
+    }
 }
