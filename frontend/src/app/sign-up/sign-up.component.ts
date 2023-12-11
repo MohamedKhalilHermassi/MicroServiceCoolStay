@@ -14,7 +14,9 @@ export class SignUpComponent {
   }
 
   onSubmit() {
+    console.log(this.user);
     this.userService.addUser(this.user).subscribe((res) => {
+
       console.log(res);
     })
   }

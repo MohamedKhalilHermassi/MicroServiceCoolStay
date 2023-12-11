@@ -12,16 +12,17 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity serverHttpSecurity) {
-        return serverHttpSecurity.csrf(ServerHttpSecurity.CsrfSpec::disable)
-                .authorizeExchange(exchange -> exchange.pathMatchers("/eureka/**","/users/add-user")
-                        .permitAll()
-                        .anyExchange().authenticated()
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+        return http
+                // ... other security configurations
+                .csrf().disable()
+                .cors().and() // Enable CORS
+                .authorizeExchange(exchange ->
+                        exchange.pathMatchers("/eureka/**", "/users/add-user")
+                                .permitAll()
+                                .anyExchange().authenticated()
                 )
-
-
-        .oauth2ResourceServer((oauth) -> oauth
-                        .jwt(Customizer.withDefaults()))
+                .oauth2ResourceServer(oauth -> oauth.jwt(Customizer.withDefaults()))
                 .build();
     }
 }
