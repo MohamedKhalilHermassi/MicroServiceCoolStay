@@ -13,9 +13,11 @@ public class Beans {
         return KeycloakBuilder.builder()
                 .serverUrl("http://localhost:9090/")
                 .realm("SpringbootKeycloak")
-                .grantType(OAuth2Constants.CLIENT_CREDENTIALS)
-                .clientId("admin-cli")
-                .clientSecret("Kkac39Y4xIyOZ0Vk8Gv9XJ1cdxbHGCM1")
+                .grantType(OAuth2Constants.PASSWORD)
+                .clientId("microservices-app")
+                .clientSecret("3pUynp3KH9CntVGx7NoLFTizeMbiSmOf")
+                .username("ayoub")
+                .password("ayoub")
                 .build();
     }
 }
