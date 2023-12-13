@@ -1,0 +1,107 @@
+version: '2.1'
+
+services:
+
+  Eureka:
+    container_name: eureka
+    build: ./EurekaServer
+    hostname: serviceregistry
+    ports:
+      - "8761:8761"
+    image: "eureka"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://serviceregistry:8761/eureka/
+
+  swiggy-gateway-docker:
+    container_name: swiggy-gateway
+    image: swiggy-gateway
+    build: ./swiggy-gateway
+    ports:
+      - "8182:8182"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
+    depends_on:
+      - Eureka
+  
+  UserMS-docker:
+    container_name: user-ms
+    image: user-ms
+    build: ./User
+    ports:
+      - "8087:8087"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
+    depends_on:
+      - Eureka
+  
+  Recommandation-docker:
+    container_name: recommandation-ms
+    image: recommandation-ms
+    build: ./Recommandation
+    ports:
+      - "8088:8088"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
+    depends_on:
+      - Eureka
+
+  Reservation-docker:
+    container_name: reservation-ms
+    image: reservation-ms
+    build: ./ReservationMS
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db-mysql:3306/reservationDB?createDatabaseIfNotExist=true&userSSL=false&max_allowed_packet=15728640
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
+    depends_on:
+      - Eureka
+      - db-mysql
+
+  Response-docker:
+    container_name: response-ms
+    image: response-ms
+    build: ./ReponseMS
+    ports:
+      - "8086:8086"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
+    depends_on:
+      - Eureka
+
+  Hebergement-docker:
+    container_name: hebergement-ms
+    image: hebergement-ms
+    build: ./HebergementMS
+    ports:
+      - "8082:8082"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
+    depends_on:
+      - Eureka
+
+  Reclamation-docker:
+    container_name: reclamation-ms
+    image: reclamation-ms
+    build: ./reclamationMS
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db-mysql:3306/reclamationDB?createDatabaseIfNotExist=true&userSSL=false&max_allowed_packet=15728640
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
+    depends_on:
+      - Eureka
+      - db-mysql
+
+  db-mysql:
+      image: "mysql:5.6"
+      container_name: db-mysql 
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+      ports:
+        - "3306:3306"
+      restart: unless-stopped
