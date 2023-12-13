@@ -141,4 +141,9 @@ public class KeyCloakUserServiceImpl implements KeyCloakUserService{
 
                 .build();
     }
+
+    public UserMS FindUserByFirstName( String firstName)
+    {
+        return userRepository.findByFirstName(firstName);
+    }
 }

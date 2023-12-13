@@ -17,6 +17,7 @@ public class CorsConfig {
         corsConfig.addAllowedMethod("GET");
         corsConfig.addAllowedMethod("PUT");
         corsConfig.addAllowedMethod("DELETE");
+        corsConfig.addAllowedMethod("OPTIONS");
         // Add more allowed methods if needed
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

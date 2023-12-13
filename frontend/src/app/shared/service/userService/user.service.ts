@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../../environments/environment.development";
 import {UserMS} from "../../models/userMS";
+import * as http from "http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   endPoint:String = environment.baseUrl+'users';
+  httpOptionsGET = {};
 
   constructor(private http:HttpClient) { }
 
@@ -35,6 +37,21 @@ export class UserService {
     };
 
     return this.http.post<any>(this.keycloakTokenUrl, body.toString(), httpOptions);
+  }
+
+
+
+ public getMyFullInfo(firstname:string)
+  {
+
+    this.httpOptionsGET = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      })
+    };
+  console.log(this.httpOptionsGET)
+  return this.http.get<UserMS>('http://localhost:8182/users/get-my-info/'+firstname,this.httpOptionsGET);
   }
 
 }

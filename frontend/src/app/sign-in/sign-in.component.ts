@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import {userCredentials} from "../shared/models/userCredentials";
 import {UserService} from "../shared/service/userService/user.service";
 import * as jwt_decode from 'jsonwebtoken';
+import {Router} from "@angular/router";
+import {UserMS} from "../shared/models/userMS";
+
 
 @Component({
   selector: 'app-sign-in',
@@ -10,7 +13,10 @@ import * as jwt_decode from 'jsonwebtoken';
 })
 export class SignInComponent {
 userCredentials:userCredentials = new userCredentials();
-  constructor(private userService:UserService) {
+userMS:UserMS = new UserMS();
+  constructor(private userService:UserService,
+  private router:Router
+  ) {
   }
   onSubmit(){
     const body = new URLSearchParams();
@@ -21,6 +27,7 @@ userCredentials:userCredentials = new userCredentials();
     body.set('grant_type', 'password');
 
     this.userService.getToken( this.userCredentials.username, this.userCredentials.password,'microservices-app','3pUynp3KH9CntVGx7NoLFTizeMbiSmOf').subscribe(
+
       (res)=>{
 
         const token:string = res.access_token
@@ -44,6 +51,43 @@ userCredentials:userCredentials = new userCredentials();
 
         console.log(token);
         console.log(res);
+
+
+        if (token!=null)
+        {
+          localStorage.setItem('username',parsedPayload.preferred_username);
+          localStorage.setItem('email',parsedPayload.email)
+          localStorage.setItem('family-name',parsedPayload.family_name)
+          localStorage.setItem('token',token)
+
+          this.userService.getMyFullInfo(parsedPayload.preferred_username).subscribe(
+            (res)=>{
+              this.userMS = res;
+              localStorage.setItem('my-H2-id',this.userMS.id.toString())
+              console.log(this.userMS)
+            }
+          )
+
+
+          this.router.navigate(["/sign-up"]);
+
+
+
+
+
+        }
+        else
+        {
+
+        }
+
+
+
+        // Store token in LocalStorage
+
+
+
+
       }
     )
     console.log(body.toString());

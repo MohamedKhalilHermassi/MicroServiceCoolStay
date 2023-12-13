@@ -5,6 +5,8 @@ import com.microservice.user.Service.KeyCloakUserServiceImpl;
 import com.microservice.user.dto.UserRegistrationRecord;
 import com.microservice.user.entities.FullUserResponse;
 import com.microservice.user.entities.FullUserWithReclamationResponse;
+import com.microservice.user.entities.UserMS;
+import jakarta.ws.rs.Path;
 import lombok.AllArgsConstructor;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +44,13 @@ public class KeycloakUserController {
     public ResponseEntity<FullUserWithReclamationResponse> findAllReclamation(@PathVariable("user-id") Long userId){
         return  ResponseEntity.ok(keyCloakUserServiceImpl.findUserWithReclamations(userId));
     }
+
+    @GetMapping("/get-my-info/{firstname}")
+    public UserMS findmyInfobyFirstName(@PathVariable("firstname") String firstname)
+    {
+        return keyCloakUserServiceImpl.FindUserByFirstName(firstname);
+    }
+
 
 
 }

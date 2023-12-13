@@ -81,3 +81,17 @@ The object is already closed [90007-224]
 2023-12-12 10:34:39.868246+01:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientException: L'objet est déjà fermé
 The object is already closed [90007-224]
+2023-12-13 15:04:09.253080+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: L'objet est déjà fermé
+The object is already closed [90007-224]
+2023-12-13 16:06:11.820025+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "delete [*]* from USERMS where ID=6"; attendu "identifier"
+Syntax error in SQL statement "delete [*]* from USERMS where ID=6"; expected "identifier"; SQL statement:
+delete * from USERMS where ID=6 [42001-224]
+2023-12-13 16:06:20.683081+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "delete userms [*]from USERMS where ID=6"
+Syntax error in SQL statement "delete userms [*]from USERMS where ID=6"; SQL statement:
+delete userms from USERMS where ID=6 [42000-224]
+2023-12-13 17:34:57.211891+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: L'objet est déjà fermé
+The object is already closed [90007-224]
