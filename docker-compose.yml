@@ -105,3 +105,11 @@ services:
       ports:
         - "3306:3306"
       restart: unless-stopped
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./
+      dockerfile: ./frontend/Dockerfile
+    ports:
+      - "4200:4200"
