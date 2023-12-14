@@ -26,6 +26,10 @@ spring:
          uri: http://localhost:8086/
          predicates:
            - Path=/reponse/**
+       - id: recommandation-microservice
+         uri: http://localhost:8088/
+         predicates:
+           - Path=/recommandations/**
 
 
 

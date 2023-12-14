@@ -108,8 +108,6 @@ services:
 
   frontend:
     container_name: frontend
-    build:
-      context: ./
-      dockerfile: ./frontend/Dockerfile
+    build: ./frontend
     ports:
-      - "4200:4200"
+      - "4200:80"

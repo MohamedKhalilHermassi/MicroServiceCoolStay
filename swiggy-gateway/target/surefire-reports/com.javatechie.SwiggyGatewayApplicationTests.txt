@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.javatechie.SwiggyGatewayApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.341 s - in com.javatechie.SwiggyGatewayApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.441 s - in com.javatechie.SwiggyGatewayApplicationTests

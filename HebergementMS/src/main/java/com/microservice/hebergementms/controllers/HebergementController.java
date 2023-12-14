@@ -49,7 +49,7 @@ public class HebergementController {
         return  ResponseEntity.ok(serviceHebergement.findHebergementWithReservations(hebergementId));
     }
 
-    @GetMapping("/with-recommandation/{hebergement-id}")
+        @GetMapping("/with-recommandation/{hebergement-id}")
     public ResponseEntity<FullHebergementWithRecommandationResponse> findAllRecommandation(@PathVariable("hebergement-id") Long hebergementId){
         return  ResponseEntity.ok(serviceHebergement.findHebergementWithRecommandation(hebergementId));
     }

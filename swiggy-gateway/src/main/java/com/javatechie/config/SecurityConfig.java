@@ -19,7 +19,7 @@ public class SecurityConfig {
 
                 .cors().and() // Enable CORS
                 .authorizeExchange(exchange ->
-                        exchange.pathMatchers("/eureka/**", "/users/**","/hebergement/**","/reservation/**","/reclamations/**")
+                        exchange.pathMatchers("/eureka/**", "/users/**","/hebergement/**","/reservation/**","/reclamations/**","recommandations/**")
                                 .permitAll()
                                 .anyExchange().authenticated()
                 )

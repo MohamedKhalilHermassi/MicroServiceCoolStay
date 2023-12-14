@@ -4,6 +4,7 @@ import {Environment} from "@angular/cli/lib/config/workspace-schema";
 import {environment} from "../../../environments/environment.development";
 import {Hebergement} from "../models/hebergement";
 import {Observable} from "rxjs";
+import {HebergementWithRecommendations} from "../models/HebergementWithRecommendations";
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,11 @@ export class HebergementService {
   public getHebergementbyId(id:number)
   {
       return this.http.get(this.endPoint+'/get-by-id/'+id)
+  }
+
+  public getHebergementWithRecommendation(id:number)
+  {
+    return this.http.get<HebergementWithRecommendations>(this.endPoint+'/with-recommandation/'+id);
+
   }
 }
