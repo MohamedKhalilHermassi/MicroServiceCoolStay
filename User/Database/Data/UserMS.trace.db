@@ -95,3 +95,12 @@ delete userms from USERMS where ID=6 [42000-224]
 2023-12-13 17:34:57.211891+01:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientException: L'objet est déjà fermé
 The object is already closed [90007-224]
+2023-12-13 19:52:50.095061+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: L'objet est déjà fermé
+The object is already closed [90007-224]
+2023-12-13 23:53:03.025777+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: L'objet est déjà fermé
+The object is already closed [90007-224]
+2023-12-14 01:18:37.234639+01:00 jdbc[35]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: L'objet est déjà fermé
+The object is already closed [90007-224]

@@ -11,9 +11,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class Reservation {
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date_debut;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate  date_fin;
     private String detail;
 }

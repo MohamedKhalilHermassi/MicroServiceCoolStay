@@ -16,9 +16,10 @@ public class SecurityConfig {
         return http
                 // ... other security configurations
                 .csrf().disable()
+
                 .cors().and() // Enable CORS
                 .authorizeExchange(exchange ->
-                        exchange.pathMatchers("/eureka/**", "/users/add-user")
+                        exchange.pathMatchers("/eureka/**", "/users/**","/hebergement/**","/reservation/**","/reclamations/**")
                                 .permitAll()
                                 .anyExchange().authenticated()
                 )

@@ -10,13 +10,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
 import { HomeComponent } from './home/home.component';
+import { FormHebergementComponent } from './form-hebergement/form-hebergement.component';
+import { HebergementComponent } from './hebergement/hebergement.component';
+import {ToastrModule} from "ngx-toastr";
+import { MesReservationsComponent } from './mes-reservations/mes-reservations.component';
+import { FormReclamationComponent } from './form-reclamation/form-reclamation.component';
+import { MesReclamationsComponent } from './mes-reclamations/mes-reclamations.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    HomeComponent
+    HomeComponent,
+    FormHebergementComponent,
+    HebergementComponent,
+    MesReservationsComponent,
+    FormReclamationComponent,
+    MesReclamationsComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +35,9 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatButtonModule
+    MatButtonModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

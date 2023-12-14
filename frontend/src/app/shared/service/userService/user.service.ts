@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../../environments/environment.development";
 import {UserMS} from "../../models/userMS";
 import * as http from "http";
+import {UserWithReservation} from "../../models/userWithReservation";
+import {UserWithReclamation} from "../../models/userWithReclamation";
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +53,16 @@ export class UserService {
       })
     };
   console.log(this.httpOptionsGET)
-  return this.http.get<UserMS>('http://localhost:8182/users/get-my-info/'+firstname,this.httpOptionsGET);
+  return this.http.get<UserMS>('http://localhost:8182/users/get-my-info/'+firstname);
   }
 
+  public getmyReservation(id:number)
+  {
+    return this.http.get<UserWithReservation>(this.endPoint+'/with-reservation/'+id)
+  }
+
+  public getMyReclamations(id:number)
+  {
+      return this.http.get<UserWithReclamation>(this.endPoint+'/with-reclamation/'+id);
+  }
 }

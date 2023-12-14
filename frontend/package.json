@@ -10,7 +10,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^16.1.0",
+    "@angular/animations": "^16.2.12",
     "@angular/cdk": "^16.2.12",
     "@angular/common": "^16.1.0",
     "@angular/compiler": "^16.1.0",
@@ -22,6 +22,7 @@
     "@angular/router": "^16.1.0",
     "crypto-browserify": "^3.12.0",
     "jsonwebtoken": "^9.0.2",
+    "ngx-toastr": "^18.0.0",
     "rxjs": "~7.8.0",
     "stream-browserify": "^3.0.0",
     "tslib": "^2.3.0",

@@ -69,7 +69,7 @@ userMS:UserMS = new UserMS();
           )
 
 
-          this.router.navigate(["/sign-up"]);
+          this.router.navigate(["/home"]);
 
 
 
